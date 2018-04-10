@@ -169,6 +169,10 @@ describe('utils', function() {
       assert.equal(truncate('lolol', 10), 'lolol');
       assert.equal(truncate('lol', 3), 'lol');
       assert.equal(truncate(new Array(1000).join('f'), 0), new Array(1000).join('f'));
+      // Invalid input
+      assert.equal(truncate(42, 10), 42);
+      assert.deepEqual(truncate([1, 2, 3], 10), [1, 2, 3]);
+      assert.deepEqual(truncate({foo: 'bar'}), {foo: 'bar'});
     });
   });
 
@@ -492,7 +496,7 @@ describe('utils', function() {
         b: 'asd',
         c: true,
         d: undefined,
-        e: 'very long string that is definitely ove\u2026',
+        e: 'very long string that is definitely over\u2026',
         f: '[Object]',
         g: '[Array]'
       };
@@ -540,7 +544,7 @@ describe('utils', function() {
         b: 'asd',
         c: true,
         d: undefined,
-        e: 'very long string that is definitely ove\u2026',
+        e: 'very long string that is definitely over\u2026',
         f: {
           foo: 42,
           bar: {
